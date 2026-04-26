@@ -99,3 +99,9 @@ See `mobile/README.md`.
 - Privacy policy template: `docs/privacy_policy_template.md`
 - Data safety notes: `docs/play_data_safety_notes.md`
 
+
+
+/Users/ayushwgadre/Library/Android/sdk/platform-tools/adb devices -l
+flutter pub get
+flutter run
+flutter run -d chrome
