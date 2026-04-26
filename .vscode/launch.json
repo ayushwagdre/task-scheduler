@@ -1,0 +1,26 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Mobile (Chrome) — doorpay",
+      "request": "launch",
+      "type": "dart",
+      "program": "mobile/lib/main.dart",
+      "cwd": "${workspaceFolder}/mobile",
+      "args": [
+        "--dart-define=API_BASE_URL=http://localhost:8080"
+      ]
+    },
+    {
+      "name": "Mobile (Android emulator) — doorpay",
+      "request": "launch",
+      "type": "dart",
+      "program": "mobile/lib/main.dart",
+      "cwd": "${workspaceFolder}/mobile",
+      "args": [
+        "--dart-define=API_BASE_URL=http://10.0.2.2:8080"
+      ]
+    }
+  ]
+}
+

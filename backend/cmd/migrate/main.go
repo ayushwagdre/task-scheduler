@@ -14,15 +14,12 @@ import (
 	_ "github.com/jackc/pgx/v5/stdlib"
 	"github.com/joho/godotenv"
 
-	"doOrPay/backend/internal/config"
+	"doOrPay/backend/config"
 )
 
 func main() {
 	_ = godotenv.Load()
-	cfg, err := config.Load()
-	if err != nil {
-		log.Fatalf("config: %v", err)
-	}
+	cfg := config.Get()
 
 	if len(os.Args) < 2 {
 		log.Fatalf("usage: migrate up|down")

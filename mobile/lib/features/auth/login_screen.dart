@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../app/router.dart';
 import '../../app/theme/app_theme.dart';
 import '../../app/widgets/auth_text_field.dart';
 import '../../app/widgets/glass_panel.dart';
+import '../../app/launch_state.dart';
+import '../../app/auth_state.dart';
 import '../../data/api/api_client.dart';
 import '../../data/storage/token_store.dart';
-import 'forgot_password_screen.dart';
-import 'signup_screen.dart';
-import '../tasks/task_list_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -51,8 +52,15 @@ class _LoginScreenState extends State<LoginScreen> {
       final token = (data['accessToken'] ?? '').toString();
       if (token.isEmpty) throw ApiException('Missing token');
       await _api.tokenStore.setAccessToken(token);
+      await authState.setLoggedIn(true);
       if (!mounted) return;
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => const TaskListScreen()));
+      final pending = LaunchState.pendingTaskId.value;
+      if (pending != null && pending.isNotEmpty) {
+        LaunchState.pendingTaskId.value = null;
+        context.go('${AppRoutes.alarm}?taskId=$pending');
+        return;
+      }
+      context.go(AppRoutes.home);
     } catch (e) {
       setState(() => _error = e.toString());
     } finally {
@@ -162,11 +170,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   onPressed: _loading
                                       ? null
                                       : () {
-                                          Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                              builder: (_) => const ForgotPasswordScreen(),
-                                            ),
-                                          );
+                                          context.go(AppRoutes.forgot);
                                         },
                                   child: Text(
                                     'FORGOT?',
@@ -226,9 +230,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         onPressed: _loading
                             ? null
                             : () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(builder: (_) => const SignupScreen()),
-                                );
+                                context.go(AppRoutes.signup);
                               },
                         child: Text(
                           'Sign up',

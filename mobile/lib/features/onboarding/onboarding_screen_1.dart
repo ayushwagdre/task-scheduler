@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../app/router.dart';
 import '../../app/theme/app_theme.dart';
-import '../auth/login_screen.dart';
-import 'onboarding_screen_2.dart';
 
 class OnboardingScreen1 extends StatelessWidget {
   const OnboardingScreen1({super.key});
@@ -149,9 +149,7 @@ class OnboardingScreen1 extends StatelessWidget {
                             ),
                           ),
                           onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(builder: (_) => const OnboardingScreen2()),
-                            );
+                            context.go(AppRoutes.onboarding2);
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -168,9 +166,7 @@ class OnboardingScreen1 extends StatelessWidget {
                         width: double.infinity,
                         child: TextButton(
                           onPressed: () {
-                            Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(builder: (_) => const LoginScreen()),
-                            );
+                            context.go(AppRoutes.login);
                           },
                           child: Text(
                             'ALREADY A MEMBER? LOG IN',

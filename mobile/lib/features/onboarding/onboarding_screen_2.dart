@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../app/router.dart';
 import '../../app/theme/app_theme.dart';
-import '../auth/login_screen.dart';
 
 class OnboardingScreen2 extends StatelessWidget {
   const OnboardingScreen2({super.key});
@@ -183,9 +184,7 @@ class OnboardingScreen2 extends StatelessWidget {
                             ),
                             onPressed: () {
                               // Step 3 not requested yet; go to Login.
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(builder: (_) => const LoginScreen()),
-                              );
+                              context.go(AppRoutes.onboarding3);
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,

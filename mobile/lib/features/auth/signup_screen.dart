@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../app/router.dart';
 import '../../app/theme/app_theme.dart';
 import '../../app/widgets/auth_text_field.dart';
 import '../../app/widgets/glass_panel.dart';
+import '../../app/auth_state.dart';
 import '../../data/api/api_client.dart';
 import '../../data/storage/token_store.dart';
-import 'login_screen.dart';
-import '../tasks/task_list_screen.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -55,12 +56,10 @@ class _SignupScreenState extends State<SignupScreen> {
       final token = (data['accessToken'] ?? '').toString();
       if (token.isEmpty) throw ApiException('Missing token');
       await _api.tokenStore.setAccessToken(token);
+      await authState.setLoggedIn(true);
 
       if (!mounted) return;
-      Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (_) => const TaskListScreen()),
-        (_) => false,
-      );
+      context.go(AppRoutes.home);
     } catch (e) {
       setState(() => _error = e.toString());
     } finally {
@@ -206,9 +205,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         onPressed: _loading
                             ? null
                             : () {
-                                Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(builder: (_) => const LoginScreen()),
-                                );
+                              context.go(AppRoutes.login);
                               },
                         child: Text(
                           'Log in',

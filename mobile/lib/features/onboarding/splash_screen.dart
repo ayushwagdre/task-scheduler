@@ -1,9 +1,15 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../../app/theme/app_theme.dart';
-import 'onboarding_screen_1.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../app/router.dart';
+import '../../app/launch_state.dart';
+import '../../data/storage/token_store.dart';
+import '../../platform/android_alarm/launch_intent.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -18,11 +24,35 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    _timer = Timer(const Duration(milliseconds: 1400), () {
+    _bootstrap();
+  }
+
+  Future<void> _bootstrap() async {
+    // If launched from an alarm notification, capture taskId for post-login routing.
+    try {
+      final taskId = await LaunchIntent.consumeInitialTaskId();
+      if (taskId != null) {
+        LaunchState.pendingTaskId.value = taskId;
+      }
+    } catch (_) {
+      // Ignore: platform channel not available (e.g. web).
+    }
+
+    final tokenStore = TokenStore(const FlutterSecureStorage());
+    final token = await tokenStore.getAccessToken();
+
+    _timer = Timer(const Duration(milliseconds: 900), () {
       if (!mounted) return;
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => const OnboardingScreen1()),
-      );
+      if (token != null && token.isNotEmpty) {
+        final pending = LaunchState.pendingTaskId.value;
+        if (pending != null && pending.isNotEmpty) {
+          context.go('${AppRoutes.alarm}?taskId=$pending');
+          return;
+        }
+        context.go(AppRoutes.home);
+      } else {
+        context.go(AppRoutes.onboarding1);
+      }
     });
   }
 
