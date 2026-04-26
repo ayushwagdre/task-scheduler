@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DOORPAY - Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#cbc4d2",
+                        "surface-dim": "#141218",
+                        "inverse-surface": "#e6e0e9",
+                        "tertiary": "#e7c365",
+                        "on-secondary-fixed": "#1f1635",
+                        "on-error-container": "#ffdad6",
+                        "surface-container": "#211f24",
+                        "primary-container": "#6750a4",
+                        "on-secondary": "#342b4b",
+                        "primary-fixed": "#e9ddff",
+                        "on-tertiary-fixed-variant": "#594400",
+                        "surface-bright": "#3b383e",
+                        "surface-container-high": "#2b292f",
+                        "surface": "#141218",
+                        "surface-container-lowest": "#0f0d13",
+                        "primary": "#cfbcff",
+                        "on-primary-fixed-variant": "#4f378a",
+                        "on-secondary-container": "#bfb2da",
+                        "outline": "#948e9c",
+                        "on-background": "#e6e0e9",
+                        "tertiary-container": "#c9a74d",
+                        "on-tertiary": "#3e2e00",
+                        "on-tertiary-container": "#503d00",
+                        "primary-fixed-dim": "#cfbcff",
+                        "surface-tint": "#cfbcff",
+                        "secondary": "#cdc0e9",
+                        "surface-container-low": "#1d1b20",
+                        "error-container": "#93000a",
+                        "on-primary-fixed": "#22005d",
+                        "inverse-primary": "#6750a4",
+                        "on-surface": "#e6e0e9",
+                        "on-primary-container": "#e0d2ff",
+                        "surface-container-highest": "#36343a",
+                        "secondary-fixed-dim": "#cdc0e9",
+                        "inverse-on-surface": "#322f35",
+                        "secondary-fixed": "#e9ddff",
+                        "tertiary-fixed-dim": "#e7c365",
+                        "on-tertiary-fixed": "#241a00",
+                        "secondary-container": "#4d4465",
+                        "on-primary": "#381e72",
+                        "on-secondary-fixed-variant": "#4b4263",
+                        "outline-variant": "#494551",
+                        "background": "#141218",
+                        "on-error": "#690005",
+                        "tertiary-fixed": "#ffdf93",
+                        "error": "#ffb4ab",
+                        "surface-variant": "#36343a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin": "24px",
+                        "md": "16px",
+                        "unit": "8px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "gutter": "16px",
+                        "xl": "40px"
+                    },
+                    "fontFamily": {
+                        "h2": ["Inter"],
+                        "cta": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display": ["Inter"],
+                        "h1": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h2": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "cta": ["16px", {"lineHeight": "1", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                        "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                        "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #000000;
+            color: #e6e0e9;
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(20, 20, 20, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen flex flex-col justify-center items-center relative overflow-hidden">
+<!-- Background Decor -->
+<div class="absolute inset-0 z-0">
+<div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary/10 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-tertiary/10 rounded-full blur-[100px]"></div>
+</div>
+<!-- Login Container -->
+<div class="w-full max-w-[400px] px-margin z-10">
+<!-- Brand Header -->
+<div class="text-center mb-xl">
+<h1 class="font-display text-display text-on-surface uppercase tracking-tighter mb-xs">
+                DOORPAY
+            </h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">
+                Discipline is the only currency
+            </p>
+</div>
+<!-- Form Panel -->
+<div class="glass-panel p-lg rounded-xl shadow-[0_20px_40px_rgba(0,0,0,0.5)]">
+<form action="#" class="flex flex-col gap-lg">
+<!-- Email Field -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant px-xs">EMAIL</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">mail</span>
+<input class="w-full h-12 pl-xl pr-md bg-surface-container-lowest border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary rounded-lg text-body-md text-on-surface placeholder:text-outline/50 transition-all outline-none" placeholder="your@discipline.com" type="email"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="flex flex-col gap-xs">
+<div class="flex justify-between items-end px-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant">PASSWORD</label>
+<a class="font-label-caps text-[10px] text-outline hover:text-primary transition-colors" href="#">FORGOT?</a>
+</div>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">lock</span>
+<input class="w-full h-12 pl-xl pr-md bg-surface-container-lowest border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary rounded-lg text-body-md text-on-surface placeholder:text-outline/50 transition-all outline-none" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<!-- Login Action -->
+<button class="w-full h-[56px] bg-on-surface text-surface font-cta text-cta uppercase tracking-widest rounded-lg hover:bg-white active:scale-95 transition-all shadow-lg mt-md" type="submit">
+                    Login
+                </button>
+</form>
+</div>
+<!-- Secondary Navigation -->
+<div class="mt-xl text-center flex flex-col gap-md">
+<p class="font-body-md text-on-surface-variant">
+                Don't have an account? 
+                <a class="font-cta text-on-surface underline underline-offset-4 hover:text-primary transition-colors ml-xs" href="#">Sign up</a>
+</p>
+<div class="flex items-center justify-center gap-md pt-md border-t border-white/5">
+<button class="flex items-center justify-center w-12 h-12 rounded-full border border-outline-variant hover:bg-surface-variant transition-colors">
+<img alt="Google" class="w-5 h-5 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" data-alt="Google logo in a minimalist grayscale style with subtle transparency" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAX_6mDNuudZUoi5ZrlYE7wERDjdrC409ilK_4lxxv5zj9nqKCGsSpPApJcuz2TQkpm3vvX5b6-DPMdfr_yXf4WeCz9hoRX5On4GL7Mo55LaRZVaQYSXnzM0FZ8CaE0g7IAN5MGN_x7hGi9EJTI4ua5WuigcRUczEcNZpYDfavv0ff6KxbPDCLq2-gTYVED422GqxwTeIUN1iDN2cs0wxJL-L-vr7BKO1ed5DpvV4ZaIZitDk2O_1XJaZ0szXXPmTSP0LYcafXahEt"/>
+</button>
+<button class="flex items-center justify-center w-12 h-12 rounded-full border border-outline-variant hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-on-surface">ios</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Legal Anchor -->
+<div class="fixed bottom-lg left-0 w-full text-center px-margin opacity-30">
+<p class="font-label-caps text-[10px] uppercase tracking-[0.2em] text-on-surface-variant">
+            DOORPAY INC © 2024 / ZERO FRICTION / MAXIMUM ACCOUNTABILITY
+        </p>
+</div>
+<!-- Decorative Elements -->
+<div class="fixed top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
+<div class="fixed bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-tertiary/50 to-transparent"></div>
+</body></html>

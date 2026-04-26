@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+        /* Pulse effect for the high-stakes feel without JS animation */
+        .glow-overlay {
+            background: radial-gradient(circle at center, rgba(147, 0, 10, 0.15) 0%, transparent 70%);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#cbc4d2",
+                        "surface-dim": "#141218",
+                        "inverse-surface": "#e6e0e9",
+                        "tertiary": "#e7c365",
+                        "on-secondary-fixed": "#1f1635",
+                        "on-error-container": "#ffdad6",
+                        "surface-container": "#211f24",
+                        "primary-container": "#6750a4",
+                        "on-secondary": "#342b4b",
+                        "primary-fixed": "#e9ddff",
+                        "on-tertiary-fixed-variant": "#594400",
+                        "surface-bright": "#3b383e",
+                        "surface-container-high": "#2b292f",
+                        "surface": "#141218",
+                        "surface-container-lowest": "#0f0d13",
+                        "primary": "#cfbcff",
+                        "on-primary-fixed-variant": "#4f378a",
+                        "on-secondary-container": "#bfb2da",
+                        "outline": "#948e9c",
+                        "on-background": "#e6e0e9",
+                        "tertiary-container": "#c9a74d",
+                        "on-tertiary": "#3e2e00",
+                        "on-tertiary-container": "#503d00",
+                        "primary-fixed-dim": "#cfbcff",
+                        "surface-tint": "#cfbcff",
+                        "secondary": "#cdc0e9",
+                        "surface-container-low": "#1d1b20",
+                        "error-container": "#93000a",
+                        "on-primary-fixed": "#22005d",
+                        "inverse-primary": "#6750a4",
+                        "on-surface": "#e6e0e9",
+                        "on-primary-container": "#e0d2ff",
+                        "surface-container-highest": "#36343a",
+                        "secondary-fixed-dim": "#cdc0e9",
+                        "inverse-on-surface": "#322f35",
+                        "secondary-fixed": "#e9ddff",
+                        "tertiary-fixed-dim": "#e7c365",
+                        "on-tertiary-fixed": "#241a00",
+                        "secondary-container": "#4d4465",
+                        "on-primary": "#381e72",
+                        "on-secondary-fixed-variant": "#4b4263",
+                        "outline-variant": "#494551",
+                        "background": "#141218",
+                        "on-error": "#690005",
+                        "tertiary-fixed": "#ffdf93",
+                        "error": "#ffb4ab",
+                        "surface-variant": "#36343a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin": "24px",
+                        "md": "16px",
+                        "unit": "8px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "gutter": "16px",
+                        "xl": "40px"
+                    },
+                    "fontFamily": {
+                        "h2": ["Inter"],
+                        "cta": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display": ["Inter"],
+                        "h1": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h2": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "cta": ["16px", {"lineHeight": "1", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                        "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                        "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body-md overflow-hidden selection:bg-error selection:text-on-error">
+<!-- TopAppBar Shell (Suppressed Nav, Branding Only for Urgency) -->
+<header class="fixed top-0 w-full z-50 bg-black/70 backdrop-blur-md border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)] flex justify-between items-center px-6 h-16 max-w-none">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-error" data-icon="local_fire_department">local_fire_department</span>
+<h1 class="font-inter font-black uppercase tracking-tighter text-xl italic text-white tracking-widest">DOORPAY</h1>
+</div>
+<div class="flex items-center">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest border border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface text-sm" data-icon="person">person</span>
+</div>
+</div>
+</header>
+<!-- Main Alarm Canvas -->
+<main class="relative h-screen w-full flex flex-col items-center justify-center px-margin pt-16 bg-surface overflow-hidden">
+<!-- Ambient Background Intensity -->
+<div class="absolute inset-0 glow-overlay pointer-events-none"></div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-error/5 rounded-full blur-[120px] pointer-events-none"></div>
+<!-- Moment of Truth Container -->
+<div class="z-10 w-full max-w-md flex flex-col items-center gap-xl">
+<!-- Urgent Status Header -->
+<div class="text-center space-y-sm">
+<span class="font-label-caps text-error uppercase tracking-widest block">Threat Level: High</span>
+<h2 class="font-display text-display text-on-background">Morning Workout</h2>
+<p class="font-body-lg text-on-surface-variant max-w-[280px] mx-auto">Upload proof of completion now or forfeit your stake.</p>
+</div>
+<!-- Visual Urgency Ring / Timer -->
+<div class="relative flex items-center justify-center">
+<!-- Outer Progress Ring (Static SVG) -->
+<svg class="w-64 h-64 -rotate-90">
+<circle class="text-white/10" cx="128" cy="128" fill="transparent" r="120" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-error" cx="128" cy="128" fill="transparent" r="120" stroke="currentColor" stroke-dasharray="753.6" stroke-dashoffset="188.4" stroke-linecap="round" stroke-width="8"></circle>
+</svg>
+<!-- Inner Countdown -->
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-display text-[64px] leading-none text-white font-black tabular-nums">04:59</span>
+<span class="font-label-caps text-on-surface-variant tracking-[0.2em] mt-2">MINUTES REMAINING</span>
+</div>
+</div>
+<!-- Financial Risk Card -->
+<div class="w-full bg-surface-container-low border border-white/5 rounded-xl p-md flex items-center justify-between shadow-2xl backdrop-blur-sm">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 bg-error-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white" data-icon="payments">payments</span>
+</div>
+<div>
+<p class="font-label-caps text-on-surface-variant text-[10px]">POTENTIAL FORFEIT</p>
+<p class="font-h2 text-on-background">$50.00</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-label-caps text-on-surface-variant text-[10px]">CURRENT STREAK</p>
+<div class="flex items-center gap-xs justify-end">
+<span class="font-h2 text-tertiary">14</span>
+<span class="material-symbols-outlined text-tertiary text-sm" data-icon="bolt" data-weight="fill" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+</div>
+</div>
+<!-- Focused Actions -->
+<div class="w-full flex flex-col gap-md">
+<!-- Primary Action: Upload Proof -->
+<button class="group relative w-full h-[64px] bg-white text-surface-container-lowest font-cta text-cta rounded-lg flex items-center justify-center overflow-hidden transition-transform active:scale-95 duration-200 shadow-[0_10px_30px_rgba(255,255,255,0.15)]">
+<div class="absolute inset-0 bg-white group-hover:bg-on-surface-variant transition-colors"></div>
+<div class="relative flex items-center gap-sm">
+<span class="material-symbols-outlined" data-icon="photo_camera">photo_camera</span>
+<span>UPLOAD PROOF</span>
+</div>
+</button>
+<!-- Secondary Action: Mark Done -->
+<button class="w-full h-[56px] border border-white/20 bg-transparent text-white font-cta text-cta rounded-lg flex items-center justify-center transition-all hover:bg-white/5 active:scale-95 duration-200">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+<span>MARK DONE</span>
+</div>
+</button>
+</div>
+</div>
+<!-- Extreme Discipline Footnote -->
+<div class="absolute bottom-10 text-center opacity-40">
+<p class="font-label-caps text-[10px] text-white">FAILURE IS NOT AN OPTION • ACCOUNTABILITY IS THE ONLY WAY</p>
+</div>
+<!-- Decorative Subtle Texture -->
+<div class="absolute inset-0 pointer-events-none opacity-[0.03]" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuByu6qcqP-iNsrYaBB0zwpmYFOSwA30lRlaoCZVxT-5czI7_V0Ym99Rb7Yd0zxfyyLtLU3vtKhgV-tV8B3T1k4WG99pNlc_NRdE_Ptcw1CqPrqzlHJim9ftsUrrK7LA-ITrI31ShKEzree8Ca35-BczfitiGZ5iEyxLU2GY-B5ZS2MIILhVJ6Z-aB8aqlk394xb9e7xhSMs9yfU5HYLOksIPmvDUQbSA9qA1GmmDIIWboDMkk9nA7Om-ZyeLwjLebmhUi69C-YEhx_M');"></div>
+</main>
+<!-- Bottom Shell (Suppressed - No Escape during Alarm) -->
+<!-- We omit the BottomNavBar as per "Shell Visibility & Relevance" rule: suppress for transactional/focused tasks -->
+</body></html>

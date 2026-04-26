@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DoOrPay - Onboarding Step 2</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#cbc4d2",
+                        "surface-dim": "#141218",
+                        "inverse-surface": "#e6e0e9",
+                        "tertiary": "#e7c365",
+                        "on-secondary-fixed": "#1f1635",
+                        "on-error-container": "#ffdad6",
+                        "surface-container": "#211f24",
+                        "primary-container": "#6750a4",
+                        "on-secondary": "#342b4b",
+                        "primary-fixed": "#e9ddff",
+                        "on-tertiary-fixed-variant": "#594400",
+                        "surface-bright": "#3b383e",
+                        "surface-container-high": "#2b292f",
+                        "surface": "#141218",
+                        "surface-container-lowest": "#0f0d13",
+                        "primary": "#cfbcff",
+                        "on-primary-fixed-variant": "#4f378a",
+                        "on-secondary-container": "#bfb2da",
+                        "outline": "#948e9c",
+                        "on-background": "#e6e0e9",
+                        "tertiary-container": "#c9a74d",
+                        "on-tertiary": "#3e2e00",
+                        "on-tertiary-container": "#503d00",
+                        "primary-fixed-dim": "#cfbcff",
+                        "surface-tint": "#cfbcff",
+                        "secondary": "#cdc0e9",
+                        "surface-container-low": "#1d1b20",
+                        "error-container": "#93000a",
+                        "on-primary-fixed": "#22005d",
+                        "inverse-primary": "#6750a4",
+                        "on-surface": "#e6e0e9",
+                        "on-primary-container": "#e0d2ff",
+                        "surface-container-highest": "#36343a",
+                        "secondary-fixed-dim": "#cdc0e9",
+                        "inverse-on-surface": "#322f35",
+                        "secondary-fixed": "#e9ddff",
+                        "tertiary-fixed-dim": "#e7c365",
+                        "on-tertiary-fixed": "#241a00",
+                        "secondary-container": "#4d4465",
+                        "on-primary": "#381e72",
+                        "on-secondary-fixed-variant": "#4b4263",
+                        "outline-variant": "#494551",
+                        "background": "#141218",
+                        "on-error": "#690005",
+                        "tertiary-fixed": "#ffdf93",
+                        "error": "#ffb4ab",
+                        "surface-variant": "#36343a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin": "24px",
+                        "md": "16px",
+                        "unit": "8px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "gutter": "16px",
+                        "xl": "40px"
+                    },
+                    "fontFamily": {
+                        "h2": ["Inter"],
+                        "cta": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display": ["Inter"],
+                        "h1": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h2": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "cta": ["16px", {"lineHeight": "1", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                        "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                        "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(20, 18, 24, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .active-glow {
+            box-shadow: 0 0 20px rgba(207, 188, 255, 0.2);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md overflow-hidden">
+<!-- Top Navigation Anchor -->
+<header class="fixed top-0 w-full z-50 bg-black/70 backdrop-blur-md border-b border-white/10 flex justify-between items-center px-6 h-16 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+<div class="text-xl font-black italic text-white tracking-widest font-inter uppercase">DOORPAY</div>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center overflow-hidden border border-white/20">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="Close-up portrait of a determined young man with a sharp undercut, looking intensely at the camera in a dark studio setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfjzq8O73OJ-b_ftHPLUzWfwmulolqsyt2VjcxRqGxLy9IFjoRvYrWhcnAVMBVvPLk6bCfuDIqB16zJ1zf24m0dGE7F2mgLJyUMkGKmAMlIPMhtyxL0fazDZK39-004fG-7Xth4vaS0Yn5kZOxeCih8nfgRkFLX86k5pow6JsQt3xI2kacMrsvB4wfFSDN6gYrj9bxUF6Px1RjPSRYur8wEQglR1aa42PJJ1ggFEIS9BPmWJb8hQf-38s4hXD8yZ92jORAs0VtpslJ"/>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 flex flex-col items-center justify-center px-margin pt-24 pb-32 max-w-lg mx-auto w-full">
+<!-- Animated Progress Indicator -->
+<div class="flex gap-2 mb-xl">
+<div class="h-1 w-8 bg-primary rounded-full"></div>
+<div class="h-1 w-12 bg-primary rounded-full"></div>
+<div class="h-1 w-8 bg-surface-container-highest rounded-full"></div>
+</div>
+<!-- Hero Headline -->
+<div class="text-center mb-xl">
+<h1 class="font-h1 text-h1 text-white mb-sm">Complete Tasks, Not Just Alarms</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xs mx-auto">
+                No more snooze button loops. Prove your discipline with photo verification or lose your stake.
+            </p>
+</div>
+<!-- Task List Visualization (Bento Style) -->
+<div class="w-full space-y-md">
+<!-- Task 1: Completed -->
+<div class="glass-card p-md rounded-xl flex items-center justify-between border-l-4 border-l-tertiary">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-tertiary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<div class="font-cta text-white">Morning Workout</div>
+<div class="font-label-caps text-on-surface-variant text-[10px]">VERIFIED AT 06:15 AM</div>
+</div>
+</div>
+<div class="w-12 h-12 rounded-lg overflow-hidden grayscale opacity-50 border border-white/10">
+<img alt="Gym Proof" class="w-full h-full object-cover" data-alt="Grainy black and white photo of a pair of dumbbells on a gym floor, low angle shot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzK0qdILMntmEQGHCTeenCp50Hw8-QwYYk8BktikEK_YRE76_Ms0qyWxaE0Qt0IYt83YUG7PF7OhOCoo71a3HHzUF92i8L2rdo8JX2ktNVt0X4wnPWlXx0zYBFEGamTG6li059HQYKoox-cdI3tw7a-qOEhe36SKzdGX_YkjSWqFLFUokRhpbSno-yW1j_QS7PIIr2t3Q9EnE3HSagWlsSOzvDE3xRFEA5JzFqfl_SfL8gf5JVvOuPqpPODcOrnl-lvrlbqZsCfApa"/>
+</div>
+</div>
+<!-- Task 2: Active / Verification Required -->
+<div class="glass-card p-md rounded-xl flex flex-col gap-md border-primary border-2 active-glow">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">camera_alt</span>
+</div>
+<div>
+<div class="font-cta text-white">Hydrate &amp; Journal</div>
+<div class="font-label-caps text-primary text-[10px]">TIME REMAINING: 04:22</div>
+</div>
+</div>
+<div class="text-error font-h2">- $5.00</div>
+</div>
+<!-- Verification Button -->
+<button class="w-full py-4 bg-primary text-on-primary font-cta rounded-lg flex items-center justify-center gap-sm active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="photo_camera">photo_camera</span>
+                    TAKE VERIFICATION PHOTO
+                </button>
+</div>
+<!-- Task 3: Upcoming -->
+<div class="glass-card p-md rounded-xl flex items-center justify-between opacity-50 grayscale">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">schedule</span>
+</div>
+<div>
+<div class="font-cta text-white">Cold Shower</div>
+<div class="font-label-caps text-on-surface-variant text-[10px]">UNLOCKS AT 08:30 AM</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Fixed Bottom Action Bar -->
+<footer class="fixed bottom-0 left-0 w-full p-margin bg-gradient-to-t from-background via-background/90 to-transparent">
+<button class="w-full py-5 bg-white text-black font-cta text-h2 rounded-xl shadow-[0_20px_40px_rgba(0,0,0,0.5)] active:scale-[0.98] transition-transform flex items-center justify-center gap-sm">
+            NEXT
+            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<div class="text-center mt-md">
+<span class="font-label-caps text-on-surface-variant opacity-40">STEP 2 OF 3</span>
+</div>
+</footer>
+<!-- Ambient Background Elements -->
+<div class="fixed top-[20%] -left-20 w-64 h-64 bg-primary/10 rounded-full blur-[120px] pointer-events-none -z-10"></div>
+<div class="fixed bottom-[10%] -right-20 w-80 h-80 bg-tertiary/5 rounded-full blur-[150px] pointer-events-none -z-10"></div>
+</body></html>

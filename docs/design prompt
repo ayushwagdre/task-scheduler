@@ -1,0 +1,257 @@
+You are a senior mobile UX designer.
+
+Design a mobile app UI for a product called **“NoExcuse”**.
+
+
+---
+
+# 🎯 PRODUCT CONCEPT
+
+NoExcuse is a task-based alarm app:
+
+* Users set tasks with alarms
+* They must COMPLETE the task (not dismiss alarm)
+* Tasks may require verification (photo, steps)
+* Users maintain streaks
+* Optional penalty system (lose money if failed)
+
+---
+
+# 📱 SCREENS + STRUCTURE
+
+---
+
+## 1. SPLASH SCREEN
+
+* App logo (center)
+* App name
+* Tagline (below)
+* No actions
+
+---
+
+## 2. ONBOARDING FLOW (3 screens)
+
+### Screen 1
+
+* Title
+* Short description
+* Illustration placeholder
+* Next button
+
+### Screen 2
+
+* Title
+* Description (task completion concept)
+* Illustration placeholder
+* Next button
+
+### Screen 3
+
+* Title
+* Description (penalty concept)
+* CTA: Get Started
+
+---
+
+## 3. AUTH FLOW
+
+### Login Screen
+
+* Email input
+* Password input
+* Login button
+* Link: Sign up
+
+---
+
+### Signup Screen
+
+* Name input
+* Email input
+* Password input
+* Goal selection (multi-choice list)
+* Signup button
+
+---
+
+## 4. HOME DASHBOARD
+
+Top section:
+
+* Greeting (optional)
+* Current streak display
+* Motivation text
+
+Main section:
+
+* List of today's tasks (scrollable)
+
+Each task item:
+
+* Task title
+* Time
+* Status indicator (pending / done / missed)
+* Quick action (complete or open)
+
+Floating button:
+
+* Add new task
+
+---
+
+## 5. CREATE TASK SCREEN
+
+Inputs:
+
+* Task title (text field)
+* Time picker
+* Repeat selector (daily/weekly/custom)
+
+Verification type selector:
+
+* None
+* Photo proof
+* Steps
+
+Optional:
+
+* Toggle: Enable penalty
+* Input: penalty amount (if enabled)
+
+CTA button:
+
+* Create Task
+
+---
+
+## 6. ALARM ACTIVE SCREEN (CRITICAL UX)
+
+Full-screen modal behavior
+
+Display:
+
+* Task title (large)
+* Time or countdown
+* Instruction text
+
+Actions:
+
+* Complete Task (primary)
+* No simple dismiss option
+
+If verification required:
+
+* Redirect to verification flow
+
+---
+
+## 7. VERIFICATION FLOW
+
+### Photo Verification
+
+* Camera preview
+* Capture button
+* Retake option
+* Submit button
+
+---
+
+### Steps Verification
+
+* Progress indicator
+* Required steps vs current
+* Auto-complete when reached
+
+---
+
+## 8. SUCCESS SCREEN
+
+* Success indicator (icon placeholder)
+* Message: task completed
+* Updated streak info
+* CTA: Continue
+
+---
+
+## 9. FAILURE SCREEN
+
+* Failure indicator (icon placeholder)
+* Message: task missed
+* If penalty enabled:
+
+  * Show penalty info
+
+CTA:
+
+* Acknowledge / continue
+
+---
+
+## 10. STATS / STREAK SCREEN
+
+* Current streak
+* Longest streak
+* Activity graph (weekly/monthly)
+* Completion rate
+
+---
+
+## 11. PROFILE SCREEN
+
+* User info
+* Selected goal
+* Settings list:
+
+  * Notifications
+  * Payments
+  * Preferences
+  * Logout
+
+---
+
+## 12. SUBSCRIPTION SCREEN
+
+* Plan list
+* Features comparison
+* CTA: Upgrade
+
+---
+
+# 🔄 NAVIGATION STRUCTURE
+
+Bottom navigation:
+
+* Home
+* Stats
+* Profile
+
+Global flows:
+
+* Task creation (modal or separate screen)
+* Alarm (full-screen override)
+
+---
+
+# 🎯 UX RULES
+
+* User should NOT easily skip alarms
+* Prioritize completion actions
+* Keep flows short and direct
+* Minimize friction in task creation
+* Maximize friction in skipping tasks
+
+---
+
+# 📦 OUTPUT
+
+Provide:
+
+1. Screen-by-screen layout structure
+2. Component hierarchy for each screen
+3. Navigation flow diagram (text-based)
+4. Interaction behavior (tap, swipe, transitions)
+
+
+Focus purely on UX and structure.
+wh

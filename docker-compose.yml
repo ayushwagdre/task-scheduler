@@ -1,0 +1,17 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: doorpay_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: doorpay
+      POSTGRES_PASSWORD: doorpay
+      POSTGRES_DB: doorpay
+    ports:
+      - "5433:5432"
+    volumes:
+      - doorpay_pgdata:/var/lib/postgresql/data
+
+volumes:
+  doorpay_pgdata:
+

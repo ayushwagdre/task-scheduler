@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#cbc4d2",
+                    "surface-dim": "#141218",
+                    "inverse-surface": "#e6e0e9",
+                    "tertiary": "#e7c365",
+                    "on-secondary-fixed": "#1f1635",
+                    "on-error-container": "#ffdad6",
+                    "surface-container": "#211f24",
+                    "primary-container": "#6750a4",
+                    "on-secondary": "#342b4b",
+                    "primary-fixed": "#e9ddff",
+                    "on-tertiary-fixed-variant": "#594400",
+                    "surface-bright": "#3b383e",
+                    "surface-container-high": "#2b292f",
+                    "surface": "#141218",
+                    "surface-container-lowest": "#0f0d13",
+                    "primary": "#cfbcff",
+                    "on-primary-fixed-variant": "#4f378a",
+                    "on-secondary-container": "#bfb2da",
+                    "outline": "#948e9c",
+                    "on-background": "#e6e0e9",
+                    "tertiary-container": "#c9a74d",
+                    "on-tertiary": "#3e2e00",
+                    "on-tertiary-container": "#503d00",
+                    "primary-fixed-dim": "#cfbcff",
+                    "surface-tint": "#cfbcff",
+                    "secondary": "#cdc0e9",
+                    "surface-container-low": "#1d1b20",
+                    "error-container": "#93000a",
+                    "on-primary-fixed": "#22005d",
+                    "inverse-primary": "#6750a4",
+                    "on-surface": "#e6e0e9",
+                    "on-primary-container": "#e0d2ff",
+                    "surface-container-highest": "#36343a",
+                    "secondary-fixed-dim": "#cdc0e9",
+                    "inverse-on-surface": "#322f35",
+                    "secondary-fixed": "#e9ddff",
+                    "tertiary-fixed-dim": "#e7c365",
+                    "on-tertiary-fixed": "#241a00",
+                    "secondary-container": "#4d4465",
+                    "on-primary": "#381e72",
+                    "on-secondary-fixed-variant": "#4b4263",
+                    "outline-variant": "#494551",
+                    "background": "#141218",
+                    "on-error": "#690005",
+                    "tertiary-fixed": "#ffdf93",
+                    "error": "#ffb4ab",
+                    "surface-variant": "#36343a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin": "24px",
+                    "md": "16px",
+                    "unit": "8px",
+                    "sm": "8px",
+                    "xs": "4px",
+                    "lg": "24px",
+                    "gutter": "16px",
+                    "xl": "40px"
+            },
+            "fontFamily": {
+                    "h2": ["Inter"],
+                    "cta": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "display": ["Inter"],
+                    "h1": ["Inter"]
+            },
+            "fontSize": {
+                    "h2": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "cta": ["16px", {"lineHeight": "1", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-caps": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                    "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                    "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(18, 18, 18, 0.7);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+        .streak-gradient {
+            background: linear-gradient(135deg, #34C759 0%, #1a5c2b 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body-md selection:bg-primary selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-black/70 backdrop-blur-md text-white border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+<div class="flex justify-between items-center px-6 h-16 w-full max-w-none">
+<div class="flex items-center gap-3">
+<img alt="User" class="w-8 h-8 rounded-full border border-white/20" data-alt="close-up profile avatar of a disciplined athlete with intense focus, cinematic lighting, dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJVcksXaJyq7DOaxhfxwzo_FKGa2ckA5bAcnlti5ua8494Yilr7dSUdLyOdW6hzUxznn1i5DYFTKdluY46_pTpEWTItyEdR54lgBdaGySF_3S0jIjq3bkFgsBR7Yfu9YFxFq4AsMfkP-CDB0PzYLU1t71ZS43Aua4cKYS6jtBa1TZ9ibjwW4N4nyOtXKC5ghEwDs_Dbd1Dy6gWpijvT4lJb_xMkHaN5AbOCd8BL7OpEoJQk01bocnb2Qv-tm5ngLC7aoXBhdwiTei2"/>
+<span class="text-xl font-black italic text-white tracking-widest font-inter uppercase tracking-tighter">DOORPAY</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-white hover:text-emerald-400 transition-colors active:scale-95 duration-200" data-icon="local_fire_department">local_fire_department</span>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-margin max-w-2xl mx-auto space-y-xl">
+<!-- Streak Hero Section -->
+<section class="text-center space-y-md">
+<p class="font-label-caps text-label-caps text-primary uppercase tracking-widest">Active Momentum</p>
+<div class="relative inline-block">
+<div class="absolute -inset-4 streak-gradient blur-3xl opacity-20 rounded-full"></div>
+<h1 class="font-display text-display text-white relative">24</h1>
+</div>
+<p class="font-h2 text-h2 text-white">Day Streak</p>
+<div class="flex justify-center gap-2">
+<div class="w-2 h-2 rounded-full bg-tertiary"></div>
+<div class="w-2 h-2 rounded-full bg-tertiary"></div>
+<div class="w-2 h-2 rounded-full bg-tertiary"></div>
+<div class="w-2 h-2 rounded-full bg-outline-variant"></div>
+</div>
+</section>
+<!-- Stats Bento Grid -->
+<section class="grid grid-cols-2 gap-gutter">
+<!-- Longest Streak Card -->
+<div class="glass-card p-lg rounded-xl flex flex-col justify-between aspect-square border border-white/5">
+<span class="material-symbols-outlined text-tertiary text-3xl" data-icon="military_tech">military_tech</span>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase">Best Streak</p>
+<p class="font-h1 text-h1 text-white">42</p>
+<p class="font-body-md text-xs text-on-surface-variant">Days of discipline</p>
+</div>
+</div>
+<!-- Financial Stake Card -->
+<div class="glass-card p-lg rounded-xl flex flex-col justify-between aspect-square border border-white/5">
+<span class="material-symbols-outlined text-error text-3xl" data-icon="payments">payments</span>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase">At Risk</p>
+<p class="font-h1 text-h1 text-white">$120</p>
+<p class="font-body-md text-xs text-on-surface-variant">Next 24 hours</p>
+</div>
+</div>
+</section>
+<!-- Weekly Activity Graph -->
+<section class="glass-card p-lg rounded-xl border border-white/5 space-y-lg">
+<div class="flex justify-between items-end">
+<div>
+<h3 class="font-h2 text-h2 text-white">Weekly Performance</h3>
+<p class="font-body-md text-on-surface-variant">Commitment adherence vs target</p>
+</div>
+<div class="text-right">
+<p class="font-h2 text-h2 text-tertiary">92%</p>
+<p class="font-label-caps text-[10px] text-on-surface-variant uppercase">Consistency</p>
+</div>
+</div>
+<!-- Custom Bar Chart -->
+<div class="flex items-end justify-between h-40 gap-2 pt-4">
+<div class="flex flex-col items-center gap-2 flex-1 group">
+<div class="w-full bg-white/10 rounded-t-sm h-[60%] group-hover:bg-white/20 transition-all"></div>
+<span class="font-label-caps text-[10px] text-on-surface-variant">M</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1 group">
+<div class="w-full bg-white/10 rounded-t-sm h-[85%] group-hover:bg-white/20 transition-all"></div>
+<span class="font-label-caps text-[10px] text-on-surface-variant">T</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1 group">
+<div class="w-full bg-white/10 rounded-t-sm h-[40%] group-hover:bg-white/20 transition-all border-b-2 border-error"></div>
+<span class="font-label-caps text-[10px] text-error">W</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1 group">
+<div class="w-full bg-tertiary rounded-t-sm h-[95%] shadow-[0_0_15px_rgba(231,195,101,0.3)]"></div>
+<span class="font-label-caps text-[10px] text-white">T</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1 group">
+<div class="w-full bg-white/10 rounded-t-sm h-[70%] group-hover:bg-white/20 transition-all"></div>
+<span class="font-label-caps text-[10px] text-on-surface-variant">F</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1 group">
+<div class="w-full bg-white/10 rounded-t-sm h-[55%] group-hover:bg-white/20 transition-all"></div>
+<span class="font-label-caps text-[10px] text-on-surface-variant">S</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1 group">
+<div class="w-full bg-white/10 rounded-t-sm h-[20%] group-hover:bg-white/20 transition-all"></div>
+<span class="font-label-caps text-[10px] text-on-surface-variant">S</span>
+</div>
+</div>
+</section>
+<!-- Detailed Insights -->
+<section class="space-y-md">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">Recent Logs</h3>
+<div class="space-y-sm">
+<div class="flex items-center justify-between p-md bg-surface-container-low rounded-lg border border-white/5">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="fitness_center">fitness_center</span>
+</div>
+<div>
+<p class="font-cta text-white">6AM Workout</p>
+<p class="text-xs text-on-surface-variant">Yesterday, 06:04 AM</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-tertiary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex items-center justify-between p-md bg-surface-container-low rounded-lg border border-white/5">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-tertiary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary text-xl" data-icon="menu_book">menu_book</span>
+</div>
+<div>
+<p class="font-cta text-white">Deep Work Block</p>
+<p class="text-xs text-on-surface-variant">Yesterday, 09:00 AM</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-tertiary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex items-center justify-between p-md bg-surface-container-low rounded-lg border border-white/5 opacity-60">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-error/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-error text-xl" data-icon="timer_off">timer_off</span>
+</div>
+<div>
+<p class="font-cta text-white">Cold Shower</p>
+<p class="text-xs text-on-surface-variant">2 days ago</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-error" data-icon="cancel" style="font-variation-settings: 'FILL' 1;">cancel</span>
+</div>
+</div>
+</section>
+<!-- CTA Callout -->
+<div class="p-lg rounded-xl bg-primary text-on-primary-fixed flex items-center justify-between shadow-[0_20px_40px_rgba(207,188,255,0.2)]">
+<div>
+<p class="font-h2 text-lg">Push Further</p>
+<p class="text-xs font-medium">Earn +5 bonus streak points today</p>
+</div>
+<button class="bg-surface px-lg py-sm rounded-full font-cta text-sm uppercase tracking-tighter active:scale-95 transition-all">
+                Execute
+            </button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full h-20 flex justify-around items-center px-8 pb-4 bg-black/80 backdrop-blur-2xl border-t border-white/10 shadow-[0_-10px_40px_rgba(0,0,0,0.8)] z-50">
+<!-- Home -->
+<button class="flex flex-col items-center justify-center text-zinc-600 hover:text-zinc-300 active:scale-90 transition-all duration-300 ease-in-out">
+<span class="material-symbols-outlined" data-icon="alarm">alarm</span>
+<span class="font-inter font-bold text-[10px] uppercase tracking-widest mt-1">Home</span>
+</button>
+<!-- Stats (Active) -->
+<button class="flex flex-col items-center justify-center text-white scale-110 drop-shadow-[0_0_8px_rgba(255,255,255,0.5)] active:scale-90 transition-all duration-300 ease-in-out">
+<span class="material-symbols-outlined active-icon" data-icon="analytics" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="font-inter font-bold text-[10px] uppercase tracking-widest mt-1">Stats</span>
+</button>
+<!-- Profile -->
+<button class="flex flex-col items-center justify-center text-zinc-600 hover:text-zinc-300 active:scale-90 transition-all duration-300 ease-in-out">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-inter font-bold text-[10px] uppercase tracking-widest mt-1">Profile</span>
+</button>
+</nav>
+</body></html>

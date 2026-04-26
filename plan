@@ -1,0 +1,177 @@
+You are a senior backend + mobile architect. Build a production-ready MVP for a "DoOrPay".
+
+## 🎯 Product Overview
+
+We are building an app where:
+
+* Users create tasks with alarms
+* They must COMPLETE tasks (not just dismiss alarms)
+* App tracks streak
+* Future: verification, AI motivation, penalties
+
+---
+
+# 🧱 TECH STACK
+
+## Backend:
+
+* Language: Go (Golang)
+* Framework: httprouter
+* Database: PostgreSQL
+* ORM: GORM or SQLC
+* Auth: JWT-based authentication
+* Notifications: Firebase Cloud Messaging (FCM)
+* Storage (later phases): AWS S3
+* Payments (later): Razorpay
+* Queue (later): Redis
+
+## Frontend:
+
+* Flutter (only structure, not full UI)
+
+---
+
+# ⚙️ PHASE 1 REQUIREMENTS (MVP)
+
+## Features:
+
+1. User Authentication
+
+   * Signup (email + password)
+   * Login (JWT)
+
+2. Task Management
+
+   * Create task (title, time, repeat type)
+   * Get all tasks
+   * Update task
+   * Delete task
+
+3. Alarm System
+
+   * Background scheduler (cron in Go)
+   * Every minute check tasks
+   * Trigger notification (mock or log if FCM not set)
+
+4. Task Completion
+
+   * Mark task as completed
+
+5. Streak System
+
+   * Track daily streak
+   * Reset streak if missed
+
+---
+
+# 📡 REQUIRED API ENDPOINTS
+
+POST /auth/signup
+POST /auth/login
+
+POST /tasks
+GET /tasks
+PUT /tasks/{id}
+DELETE /tasks/{id}
+
+POST /tasks/{id}/complete
+
+GET /streaks
+
+---
+
+# 🗄️ DATABASE DESIGN
+
+Design proper schemas for:
+
+* users
+* tasks
+* task_logs
+* streaks
+
+Include migrations.
+
+---
+
+# 🧠 BACKEND ARCHITECTURE
+
+Follow clean architecture:
+
+* cmd/
+* internal/
+
+  * handlers/
+  * services/
+  * repositories/
+  * models/
+  * middleware/
+  * scheduler/
+
+---
+
+# ⏰ SCHEDULER
+
+Implement:
+
+* Cron job running every minute
+* Fetch tasks for current time
+* Trigger notification (log-based is fine for now)
+
+---
+
+# 🔐 AUTH
+
+* JWT token generation
+* Middleware for protected routes
+
+---
+
+# 🧪 TESTING
+
+* Add basic unit tests for:
+
+  * task creation
+  * streak calculation
+
+---
+
+# 📦 OUTPUT FORMAT
+
+1. Full project folder structure
+2. All core files with code
+3. Setup instructions (run locally)
+4. Example API requests (curl/Postman)
+
+---
+
+# ⚡ PHASE 2 (DO NOT IMPLEMENT, JUST DESIGN)
+
+Explain how to extend system for:
+
+* Photo verification (S3)
+* AI motivation (OpenAI)
+* Smart reminders (retry logic)
+
+---
+
+# 💰 PHASE 3 (DO NOT IMPLEMENT, JUST DESIGN)
+
+Explain:
+
+* Subscription system (Razorpay)
+* Penalty system (commitment logic)
+* WhatsApp integration
+
+---
+
+# IMPORTANT
+
+* Write clean, production-ready code
+* Use environment variables
+* Follow best practices
+* Keep it simple but scalable
+* Do NOT overcomplicate
+
+---
+
+Now generate the complete backend MVP.

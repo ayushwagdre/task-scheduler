@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#cbc4d2",
+                        "surface-dim": "#141218",
+                        "inverse-surface": "#e6e0e9",
+                        "tertiary": "#e7c365",
+                        "on-secondary-fixed": "#1f1635",
+                        "on-error-container": "#ffdad6",
+                        "surface-container": "#211f24",
+                        "primary-container": "#6750a4",
+                        "on-secondary": "#342b4b",
+                        "primary-fixed": "#e9ddff",
+                        "on-tertiary-fixed-variant": "#594400",
+                        "surface-bright": "#3b383e",
+                        "surface-container-high": "#2b292f",
+                        "surface": "#141218",
+                        "surface-container-lowest": "#0f0d13",
+                        "primary": "#cfbcff",
+                        "on-primary-fixed-variant": "#4f378a",
+                        "on-secondary-container": "#bfb2da",
+                        "outline": "#948e9c",
+                        "on-background": "#e6e0e9",
+                        "tertiary-container": "#c9a74d",
+                        "on-tertiary": "#3e2e00",
+                        "on-tertiary-container": "#503d00",
+                        "primary-fixed-dim": "#cfbcff",
+                        "surface-tint": "#cfbcff",
+                        "secondary": "#cdc0e9",
+                        "surface-container-low": "#1d1b20",
+                        "error-container": "#93000a",
+                        "on-primary-fixed": "#22005d",
+                        "inverse-primary": "#6750a4",
+                        "on-surface": "#e6e0e9",
+                        "on-primary-container": "#e0d2ff",
+                        "surface-container-highest": "#36343a",
+                        "secondary-fixed-dim": "#cdc0e9",
+                        "inverse-on-surface": "#322f35",
+                        "secondary-fixed": "#e9ddff",
+                        "tertiary-fixed-dim": "#e7c365",
+                        "on-tertiary-fixed": "#241a00",
+                        "secondary-container": "#4d4465",
+                        "on-primary": "#381e72",
+                        "on-secondary-fixed-variant": "#4b4263",
+                        "outline-variant": "#494551",
+                        "background": "#141218",
+                        "on-error": "#690005",
+                        "tertiary-fixed": "#ffdf93",
+                        "error": "#ffb4ab",
+                        "surface-variant": "#36343a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin": "24px",
+                        "md": "16px",
+                        "unit": "8px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "gutter": "16px",
+                        "xl": "40px"
+                    },
+                    "fontFamily": {
+                        "h2": ["Inter"],
+                        "cta": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display": ["Inter"],
+                        "h1": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h2": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "cta": ["16px", {"lineHeight": "1", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                        "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                        "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #000000;
+            color: #e6e0e9;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glass-panel {
+            background: rgba(20, 20, 20, 0.7);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .capture-ring {
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md">
+<!-- Top Navigation Shell -->
+<header class="fixed top-0 w-full z-50 bg-black/70 backdrop-blur-md border-b border-white/10 flex justify-between items-center px-6 h-16 w-full max-w-none shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-white cursor-pointer active:scale-95 duration-200">close</span>
+<span class="font-inter font-black uppercase tracking-tighter text-white text-xl italic tracking-widest">DOORPAY</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest border border-white/10 overflow-hidden">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="Intense close-up portrait of a determined man in a dark hoodie with dramatic high-contrast lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAI8uZj1f1n5gWFLoj4GE0pmVgGTrHMY0dozrtn-hlNIs5i0oIRzh3VazI-8jfWUqSHzf4aoe7vk6ZGUfI6dYG_hQcVBjVTAyQXaJT2HGkG_TXpIPIvRU4ii_DpwDcJZbM4-63zqJwBSuDPJcuCu4KdAQEZT2nyefvOkIpwSqQUuUjuGSpRUEzKf0umMFU3x2nZ8JHzbyxI8NCNGENnNnP8o1QyHVHMimal36nvXVSwdlMWbRemYtHumQGm9kvl54NdysiHO1za4V3N"/>
+</div>
+<span class="material-symbols-outlined text-white" data-icon="local_fire_department">local_fire_department</span>
+</div>
+</header>
+<main class="pt-24 pb-32 px-margin flex flex-col min-h-screen">
+<!-- Header Section -->
+<section class="mb-xl">
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest mb-xs">MOMENT OF TRUTH</p>
+<h1 class="font-h1 text-h1 text-on-background">Verification Required</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-sm">Complete your task or face the penalty. Precision is mandatory.</p>
+</section>
+<!-- Proof Section: Camera View / Workspace -->
+<section class="flex-1 flex flex-col gap-lg">
+<!-- Camera Viewfinder -->
+<div class="relative w-full aspect-[3/4] bg-surface-container-lowest rounded-xl overflow-hidden border border-white/10 shadow-2xl group">
+<img alt="Workspace" class="w-full h-full object-cover opacity-60" data-alt="A clean, minimalist workspace with a high-end laptop, dark desk, and soft focused background lighting, professional aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-pIkB6AKhXlM4mnguygt-yVo8VERtdsf7uyl37-0ncpapSNixGdeh6kl6V6vGJgcvLN-V_6ANCgi7Enm5TfQ7HnSyM-4Jp0kYWGVrN_ERgtnrLxHwYXHPEDUSIhqP6hd85Ldrb558ZkHdLzA5wiBTP6Nv3E8uVMlqGdqstGQQf2aLT401Z7r6YbayG9UkMYS7giSg9nytFa2Z21lQXVDHNmwtZMBd0Gh2zs9R4kl8C876R7Trg-tRP56-mhQvWc1-qQXdIdsDsZb3"/>
+<!-- Viewfinder UI Overlays -->
+<div class="absolute inset-0 flex flex-col justify-between p-md pointer-events-none">
+<div class="flex justify-between items-start">
+<div class="px-3 py-1 bg-black/80 rounded-full border border-white/20 flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+<span class="text-[10px] font-bold tracking-tighter">LIVE FEED</span>
+</div>
+<span class="material-symbols-outlined text-white opacity-50">grid_on</span>
+</div>
+<div class="text-center">
+<p class="font-label-caps text-white drop-shadow-md text-sm">ALIGN WORKSPACE IN FRAME</p>
+</div>
+<div class="flex justify-center items-center pb-sm pointer-events-auto">
+<button class="w-16 h-16 rounded-full bg-white flex items-center justify-center capture-ring active:scale-90 transition-all duration-300">
+<div class="w-12 h-12 rounded-full border-2 border-black"></div>
+</button>
+</div>
+</div>
+<!-- Focus Brackets -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 border-2 border-white/20 rounded-lg pointer-events-none"></div>
+</div>
+<!-- Task Instructions Card -->
+<div class="glass-panel p-lg rounded-xl flex flex-col gap-md">
+<div class="flex items-start gap-md">
+<div class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-white" data-icon="photo_camera">photo_camera</span>
+</div>
+<div>
+<h2 class="font-h2 text-h2 text-white">Show your workspace</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Capture a clear photo of your desk setup to confirm deep-work session start.</p>
+</div>
+</div>
+<div class="h-px bg-white/10 w-full"></div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-tertiary text-sm">schedule</span>
+<span class="font-label-caps text-xs text-on-surface-variant">04:59 REMAINING</span>
+</div>
+<div class="px-3 py-1 rounded bg-error/20 border border-error/30">
+<span class="font-label-caps text-[10px] text-error">PENALTY: $5.00</span>
+</div>
+</div>
+</div>
+<!-- Secondary Task: Step Progress -->
+<div class="bg-surface-container rounded-xl p-lg border border-white/5">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-label-caps text-on-surface-variant">PHYSICAL CALIBRATION</h3>
+<span class="font-h2 text-white">08/10</span>
+</div>
+<p class="font-body-md text-on-surface-variant mb-md">Take 10 steps to activate metabolic focus.</p>
+<!-- Progress Bar -->
+<div class="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[80%] transition-all duration-1000"></div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Action Area -->
+<div class="fixed bottom-0 left-0 w-full p-6 bg-black/90 backdrop-blur-xl border-t border-white/10 z-50">
+<div class="max-w-md mx-auto flex flex-col gap-md">
+<button class="w-full h-14 bg-white text-black font-cta text-cta rounded-lg uppercase tracking-widest active:scale-[0.98] transition-transform flex items-center justify-center gap-2">
+                Submit Proof
+                <span class="material-symbols-outlined font-bold">arrow_forward</span>
+</button>
+<p class="text-center font-label-caps text-[10px] text-zinc-600">BY SUBMITTING YOU AGREE TO AI VERIFICATION LOGS</p>
+</div>
+</div>
+<!-- Hidden Layout Padding to avoid overlapping with fixed bottom -->
+<div class="h-32"></div>
+</body></html>
