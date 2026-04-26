@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../app/router.dart';
 import '../../app/theme/app_theme.dart';
 
 class DataPrivacyScreen extends StatelessWidget {
@@ -11,7 +12,16 @@ class DataPrivacyScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Data & privacy'),
-        leading: IconButton(icon: const Icon(Icons.arrow_back), onPressed: () => context.pop()),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            if (Navigator.of(context).canPop()) {
+              context.pop();
+            } else {
+              context.go(AppRoutes.home);
+            }
+          },
+        ),
       ),
       body: ListView(
         padding: const EdgeInsets.all(24),

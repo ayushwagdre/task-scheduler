@@ -75,7 +75,13 @@ class _SignupScreenState extends State<SignupScreen> {
         title: const Text('DOORPAY'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: _loading ? null : () => Navigator.of(context).maybePop(),
+          onPressed: () {
+            if (context.canPop()) {
+              context.pop();
+              return;
+            }
+            context.go(AppRoutes.login);
+          },
         ),
       ),
       body: Stack(

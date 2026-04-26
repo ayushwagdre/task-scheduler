@@ -149,7 +149,7 @@ class OnboardingScreen1 extends StatelessWidget {
                             ),
                           ),
                           onPressed: () {
-                            context.go(AppRoutes.onboarding2);
+                            context.push(AppRoutes.onboarding2);
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,

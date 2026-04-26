@@ -69,6 +69,29 @@ class _TaskListScreenState extends State<TaskListScreen> {
     }
   }
 
+  Future<void> _confirmDelete(String id) async {
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Delete task?'),
+        content: const Text('This removes it from the server and cancels reminders.'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(false),
+            child: const Text('Cancel'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(ctx).pop(true),
+            child: const Text('Delete'),
+          ),
+        ],
+      ),
+    );
+    if (ok == true) {
+      await _deleteTask(id);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,64 +131,69 @@ class _TaskListScreenState extends State<TaskListScreen> {
                         itemBuilder: (context, i) {
                           final t = _tasks[i];
                           final title = (t['title'] ?? '').toString();
+                          final desc = (t['description'] ?? 'Stay disciplined.').toString();
                           final next = (t['nextTriggerAt'] ?? '').toString();
                           final id = (t['id'] ?? '').toString();
-                          return Container(
-                            padding: const EdgeInsets.all(16),
-                            decoration: BoxDecoration(
-                              color: Colors.black.withValues(alpha: 0.35),
+                          return Material(
+                            color: Colors.transparent,
+                            child: InkWell(
                               borderRadius: BorderRadius.circular(16),
-                              border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
-                            ),
-                            child: Row(
-                              children: [
-                                const Icon(Icons.alarm, color: AppColors.primary),
-                                const SizedBox(width: 12),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(title, style: AppTextStyles.cta.copyWith(color: Colors.white)),
-                                      const SizedBox(height: 4),
-                                      Text(
-                                        next,
-                                        style: AppTextStyles.bodyMd.copyWith(
-                                          fontSize: 12,
-                                          color: AppColors.onSurfaceVariant,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                              onTap: id.isEmpty ? null : () => context.go('${AppRoutes.alarm}?taskId=$id'),
+                              child: Container(
+                                padding: const EdgeInsets.all(16),
+                                decoration: BoxDecoration(
+                                  color: Colors.black.withValues(alpha: 0.35),
+                                  borderRadius: BorderRadius.circular(16),
+                                  border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
                                 ),
-                                IconButton(
-                                  tooltip: 'Delete',
-                                  onPressed: id.isEmpty
-                                      ? null
-                                      : () async {
-                                          final ok = await showDialog<bool>(
-                                            context: context,
-                                            builder: (ctx) => AlertDialog(
-                                              title: const Text('Delete task?'),
-                                              content: const Text('This removes it from the server and cancels reminders.'),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () => Navigator.of(ctx).pop(false),
-                                                  child: const Text('Cancel'),
-                                                ),
-                                                FilledButton(
-                                                  onPressed: () => Navigator.of(ctx).pop(true),
-                                                  child: const Text('Delete'),
-                                                ),
-                                              ],
+                                child: Row(
+                                  children: [
+                                    const Icon(Icons.alarm, color: AppColors.primary),
+                                    const SizedBox(width: 12),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(title, style: AppTextStyles.cta.copyWith(color: Colors.white)),
+                                          const SizedBox(height: 4),
+                                          Text(
+                                            desc,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: AppTextStyles.bodyMd.copyWith(
+                                              fontSize: 12,
+                                              color: AppColors.onSurfaceVariant,
                                             ),
-                                          );
-                                          if (ok == true) {
-                                            await _deleteTask(id);
-                                          }
-                                        },
-                                  icon: Icon(Icons.delete_outline, color: Theme.of(context).colorScheme.error),
+                                          ),
+                                          const SizedBox(height: 6),
+                                          Text(
+                                            next,
+                                            style: AppTextStyles.bodyMd.copyWith(
+                                              fontSize: 12,
+                                              color: AppColors.onSurfaceVariant,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    PopupMenuButton<String>(
+                                      enabled: id.isNotEmpty,
+                                      icon: const Icon(Icons.more_vert),
+                                      onSelected: (v) async {
+                                        if (v == 'edit') {
+                                          context.go('/tasks/$id/edit', extra: t);
+                                        } else if (v == 'delete') {
+                                          await _confirmDelete(id);
+                                        }
+                                      },
+                                      itemBuilder: (ctx) => const [
+                                        PopupMenuItem(value: 'edit', child: Text('Edit')),
+                                        PopupMenuItem(value: 'delete', child: Text('Delete')),
+                                      ],
+                                    ),
+                                  ],
                                 ),
-                              ],
+                              ),
                             ),
                           );
                         },

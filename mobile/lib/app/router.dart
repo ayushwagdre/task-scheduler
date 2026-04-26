@@ -14,6 +14,7 @@ import '../features/screens/streak_stats_screen.dart';
 import '../features/screens/success_screen.dart';
 import '../features/screens/verification_screen.dart';
 import '../features/tasks/create_task_screen.dart';
+import '../features/tasks/edit_task_screen.dart';
 import '../features/tasks/task_list_screen.dart';
 import 'auth_state.dart';
 
@@ -27,6 +28,7 @@ class AppRoutes {
   static const forgot = '/forgot';
   static const home = '/home';
   static const createTask = '/tasks/create';
+  static const editTask = '/tasks/:id/edit';
   static const alarm = '/alarm';
   static const verification = '/verification';
   static const success = '/success';
@@ -98,6 +100,21 @@ GoRouter buildRouter(AuthState auth) {
       GoRoute(
         path: AppRoutes.createTask,
         builder: (context, state) => const CreateTaskScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.editTask,
+        builder: (context, state) {
+          final id = state.pathParameters['id'] ?? '';
+          final t = (state.extra as Map?)?.cast<String, dynamic>();
+          final schedule = (t?['schedule'] as Map?)?.cast<String, dynamic>() ?? const <String, dynamic>{};
+          return EditTaskScreen(
+            taskId: id,
+            initialTitle: (t?['title'] ?? '').toString(),
+            initialDescription: (t?['description'] ?? '').toString(),
+            initialSchedule: schedule,
+            initialTimezone: (t?['timezone'] ?? 'Asia/Kolkata').toString(),
+          );
+        },
       ),
       GoRoute(
         path: AppRoutes.alarm,

@@ -12,7 +12,16 @@ class StreakStatsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Stats'),
-        leading: IconButton(icon: const Icon(Icons.arrow_back), onPressed: () => context.pop()),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            if (Navigator.of(context).canPop()) {
+              context.pop();
+            } else {
+              context.go(AppRoutes.home);
+            }
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(24),

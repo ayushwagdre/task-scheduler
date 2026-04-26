@@ -27,12 +27,14 @@ func NewTaskService() TaskServiceInterface { return &taskService{} }
 
 type CreateTaskInput struct {
 	Title    string            `json:"title"`
+	Description string         `json:"description"`
 	Timezone string            `json:"timezone"`
 	Schedule models.TaskSchedule `json:"schedule"`
 }
 
 type UpdateTaskInput struct {
 	Title    *string            `json:"title,omitempty"`
+	Description *string         `json:"description,omitempty"`
 	Timezone *string            `json:"timezone,omitempty"`
 	Schedule *models.TaskSchedule `json:"schedule,omitempty"`
 	Active   *bool              `json:"active,omitempty"`
@@ -63,6 +65,7 @@ func (s *taskService) Create(ctx context.Context, db *gorm.DB, userID string, in
 		ID:              uuid.NewString(),
 		UserID:          userID,
 		Title:           in.Title,
+		Description:     in.Description,
 		ScheduleType:    string(in.Schedule.Type),
 		SchedulePayload: payload,
 		Timezone:        in.Timezone,
@@ -108,6 +111,9 @@ func (s *taskService) Update(ctx context.Context, db *gorm.DB, userID, taskID st
 
 	if in.Title != nil {
 		t.Title = *in.Title
+	}
+	if in.Description != nil {
+		t.Description = *in.Description
 	}
 	if in.Timezone != nil {
 		t.Timezone = *in.Timezone
@@ -185,6 +191,7 @@ func mapTaskModel(t db_models.Task, sched models.TaskSchedule) models.Task {
 		ID:            t.ID,
 		UserID:        t.UserID,
 		Title:         t.Title,
+		Description:   t.Description,
 		Timezone:      t.Timezone,
 		Schedule:      sched,
 		NextTriggerAt: t.NextTriggerAt,

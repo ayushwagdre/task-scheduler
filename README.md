@@ -105,3 +105,5 @@ See `mobile/README.md`.
 flutter pub get
 flutter run
 flutter run -d chrome
+
+flutter run -d emulator-5554 --dart-define=API_BASE_URL=http://10.0.2.2:8080

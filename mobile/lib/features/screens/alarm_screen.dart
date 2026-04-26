@@ -107,6 +107,7 @@ class _AlarmScreenState extends State<AlarmScreen> {
     final cs = Theme.of(context).colorScheme;
 
     final title = (_task?['title'] ?? 'Task').toString();
+    final desc = (_task?['description'] ?? 'Stay disciplined.').toString();
     final id = widget.taskId ?? '';
 
     return Scaffold(
@@ -170,7 +171,7 @@ class _AlarmScreenState extends State<AlarmScreen> {
                       Text(title, style: AppTextStyles.display.copyWith(fontSize: 40, color: Colors.white)),
                       const SizedBox(height: 12),
                       Text(
-                        'Mark done to reschedule the next reminder.',
+                        desc,
                         style: AppTextStyles.bodyMd.copyWith(color: AppColors.onSurfaceVariant),
                         textAlign: TextAlign.center,
                       ),
@@ -178,7 +179,7 @@ class _AlarmScreenState extends State<AlarmScreen> {
                       Opacity(
                         opacity: 0.5,
                         child: Text(
-                          'Proof upload is mocked for now.',
+                          'Mark done to reschedule the next reminder.',
                           style: AppTextStyles.bodyMd.copyWith(color: AppColors.onSurfaceVariant, fontSize: 12),
                         ),
                       ),

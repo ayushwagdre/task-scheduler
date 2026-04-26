@@ -63,6 +63,16 @@ class OnboardingScreen2 extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(24, 12, 24, 12),
                   child: Row(
                     children: [
+                      IconButton(
+                        onPressed: () {
+                          if (context.canPop()) {
+                            context.pop();
+                          } else {
+                            context.go(AppRoutes.onboarding1);
+                          }
+                        },
+                        icon: const Icon(Icons.arrow_back, color: Colors.white),
+                      ),
                       Text(
                         'DOORPAY',
                         style: AppTextStyles.cta.copyWith(
@@ -184,7 +194,7 @@ class OnboardingScreen2 extends StatelessWidget {
                             ),
                             onPressed: () {
                               // Step 3 not requested yet; go to Login.
-                              context.go(AppRoutes.onboarding3);
+                              context.push(AppRoutes.onboarding3);
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,

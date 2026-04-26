@@ -158,91 +158,145 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profile'),
-        leading: IconButton(icon: const Icon(Icons.arrow_back), onPressed: () => context.pop()),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            if (Navigator.of(context).canPop()) {
+              context.pop();
+            } else {
+              context.go(AppRoutes.home);
+            }
+          },
+        ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
           children: [
-            Row(
-              children: [
-                CircleAvatar(
-                  radius: 28,
-                  backgroundColor: AppColors.surfaceContainerLow,
-                  child: Icon(Icons.person, color: Colors.white.withValues(alpha: 0.8), size: 28),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Your profile', style: AppTextStyles.cta.copyWith(color: Colors.white)),
-                      const SizedBox(height: 4),
-                      Text(
-                        'Settings and account actions will live here.',
-                        style: AppTextStyles.bodyMd.copyWith(color: AppColors.onSurfaceVariant),
-                      ),
-                    ],
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.black.withValues(alpha: 0.35),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
+              ),
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    radius: 26,
+                    backgroundColor: AppColors.surfaceContainerLow,
+                    child: Icon(Icons.person, color: Colors.white.withValues(alpha: 0.8), size: 26),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-            if (_loadingPrefs)
-              const LinearProgressIndicator()
-            else
-              SwitchListTile(
-                secondary: const Icon(Icons.notifications_active),
-                title: const Text('Task reminders'),
-                subtitle: Text(
-                  _remindersEnabled
-                      ? 'Enabled (Android notifications + alarms)'
-                      : 'Disabled (no local reminders)',
-                ),
-                value: _remindersEnabled,
-                onChanged: _working ? null : _toggleReminders,
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Settings', style: AppTextStyles.cta.copyWith(color: Colors.white)),
+                        const SizedBox(height: 4),
+                        Text(
+                          _working ? 'Syncing changes…' : 'Manage reminders and account.',
+                          style: AppTextStyles.bodyMd.copyWith(color: AppColors.onSurfaceVariant),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-            ListTile(
-              leading: const Icon(Icons.schedule),
-              title: const Text('Exact alarms access'),
-              subtitle: const Text('Recommended for time-sensitive reminders'),
-              onTap: _working
-                  ? null
-                  : () async {
-                      await AndroidPermissions.openExactAlarmSettings();
-                    },
             ),
-            ListTile(
-              leading: const Icon(Icons.analytics),
-              title: const Text('Streak stats'),
-              onTap: () => context.go(AppRoutes.streaks),
-            ),
-            ListTile(
-              leading: const Icon(Icons.privacy_tip),
-              title: const Text('Data & privacy'),
-              onTap: () => context.go(AppRoutes.privacy),
-            ),
-            ListTile(
-              leading: const Icon(Icons.alarm),
-              title: const Text('Alarm screen (demo)'),
-              onTap: () => context.go(AppRoutes.alarm),
-            ),
-            ListTile(
-              leading: const Icon(Icons.logout),
-              title: const Text('Sign out'),
-              onTap: _working ? null : _signOut,
-            ),
-            ListTile(
-              leading: Icon(Icons.delete_forever, color: Theme.of(context).colorScheme.error),
-              title: Text(
-                'Delete account',
-                style: TextStyle(color: Theme.of(context).colorScheme.error),
+            const SizedBox(height: 18),
+
+            Text('REMINDERS', style: AppTextStyles.labelCaps.copyWith(color: AppColors.onSurfaceVariant)),
+            const SizedBox(height: 8),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.black.withValues(alpha: 0.28),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
               ),
-              subtitle: const Text('Permanently delete your account and data'),
-              onTap: _working ? null : _deleteAccount,
+              child: Column(
+                children: [
+                  if (_loadingPrefs) const LinearProgressIndicator(minHeight: 2),
+                  SwitchListTile(
+                    secondary: const Icon(Icons.notifications_active),
+                    title: const Text('Task reminders'),
+                    subtitle: Text(
+                      _remindersEnabled ? 'Enabled (notifications + alarms)' : 'Disabled (no local reminders)',
+                    ),
+                    value: _remindersEnabled,
+                    onChanged: (_working || _loadingPrefs) ? null : _toggleReminders,
+                  ),
+                  const Divider(height: 1),
+                  ListTile(
+                    leading: const Icon(Icons.schedule),
+                    title: const Text('Exact alarms access'),
+                    subtitle: const Text('Recommended for time-sensitive reminders'),
+                    onTap: _working ? null : () => AndroidPermissions.openExactAlarmSettings(),
+                  ),
+                ],
+              ),
             ),
-            const Spacer(),
+
+            const SizedBox(height: 18),
+            Text('OTHER', style: AppTextStyles.labelCaps.copyWith(color: AppColors.onSurfaceVariant)),
+            const SizedBox(height: 8),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.black.withValues(alpha: 0.28),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
+              ),
+              child: Column(
+                children: [
+                  ListTile(
+                    leading: const Icon(Icons.analytics),
+                    title: const Text('Streak stats'),
+                    onTap: () => context.go(AppRoutes.streaks),
+                  ),
+                  const Divider(height: 1),
+                  ListTile(
+                    leading: const Icon(Icons.privacy_tip),
+                    title: const Text('Data & privacy'),
+                    onTap: () => context.go(AppRoutes.privacy),
+                  ),
+                  const Divider(height: 1),
+                  ListTile(
+                    leading: const Icon(Icons.alarm),
+                    title: const Text('Alarm screen (demo)'),
+                    onTap: () => context.go(AppRoutes.alarm),
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 18),
+            Text('ACCOUNT', style: AppTextStyles.labelCaps.copyWith(color: AppColors.onSurfaceVariant)),
+            const SizedBox(height: 8),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.black.withValues(alpha: 0.28),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
+              ),
+              child: Column(
+                children: [
+                  ListTile(
+                    leading: const Icon(Icons.logout),
+                    title: const Text('Sign out'),
+                    onTap: _working ? null : _signOut,
+                  ),
+                  const Divider(height: 1),
+                  ListTile(
+                    leading: Icon(Icons.delete_forever, color: Theme.of(context).colorScheme.error),
+                    title: Text('Delete account', style: TextStyle(color: Theme.of(context).colorScheme.error)),
+                    subtitle: const Text('Permanently delete your account and data'),
+                    onTap: _working ? null : _deleteAccount,
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 22),
             SizedBox(
               height: 56,
               child: FilledButton(

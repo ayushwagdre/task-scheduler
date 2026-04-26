@@ -9,7 +9,9 @@ import 'package:go_router/go_router.dart';
 import '../../app/router.dart';
 import '../../app/launch_state.dart';
 import '../../data/storage/token_store.dart';
+import '../../data/storage/settings_store.dart';
 import '../../platform/android_alarm/launch_intent.dart';
+import '../../data/analytics/app_analytics.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -28,6 +30,11 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> _bootstrap() async {
+    // Track install once (best-effort).
+    try {
+      await buildAnalytics().trackInstallOnce();
+    } catch (_) {}
+
     // If launched from an alarm notification, capture taskId for post-login routing.
     try {
       final taskId = await LaunchIntent.consumeInitialTaskId();
@@ -40,6 +47,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
     final tokenStore = TokenStore(const FlutterSecureStorage());
     final token = await tokenStore.getAccessToken();
+    final settings = SettingsStore(const FlutterSecureStorage());
+    final hasSeenOnboarding = await settings.getHasSeenOnboarding();
 
     _timer = Timer(const Duration(milliseconds: 900), () {
       if (!mounted) return;
@@ -51,7 +60,7 @@ class _SplashScreenState extends State<SplashScreen> {
         }
         context.go(AppRoutes.home);
       } else {
-        context.go(AppRoutes.onboarding1);
+        context.go(hasSeenOnboarding ? AppRoutes.login : AppRoutes.onboarding1);
       }
     });
   }

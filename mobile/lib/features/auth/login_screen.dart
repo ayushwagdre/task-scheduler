@@ -170,7 +170,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   onPressed: _loading
                                       ? null
                                       : () {
-                                          context.go(AppRoutes.forgot);
+                                          context.push(AppRoutes.forgot);
                                         },
                                   child: Text(
                                     'FORGOT?',
@@ -230,7 +230,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         onPressed: _loading
                             ? null
                             : () {
-                                context.go(AppRoutes.signup);
+                                context.push(AppRoutes.signup);
                               },
                         child: Text(
                           'Sign up',

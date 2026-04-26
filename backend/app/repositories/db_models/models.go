@@ -14,6 +14,7 @@ type Task struct {
 	ID             string    `gorm:"type:uuid;default:uuid_generate_v4();primaryKey"`
 	UserID         string    `gorm:"type:uuid;index;not null"`
 	Title          string    `gorm:"not null"`
+	Description    string    `gorm:"not null;default:''"`
 	ScheduleType   string    `gorm:"not null"`
 	SchedulePayload []byte   `gorm:"type:jsonb;not null"`
 	Timezone       string    `gorm:"not null"`
@@ -38,5 +39,14 @@ type Streak struct {
 	LongestStreak   int        `gorm:"not null;default:0"`
 	LastCompletedDay *time.Time `gorm:"type:date"`
 	UpdatedAt       time.Time  `gorm:"not null;default:now()"`
+}
+
+type AppEvent struct {
+	ID        string    `gorm:"type:uuid;default:uuid_generate_v4();primaryKey"`
+	InstallID string    `gorm:"index;not null"`
+	UserID    *string   `gorm:"type:uuid;index"`
+	EventType string    `gorm:"index;not null"`
+	Metadata  []byte    `gorm:"type:jsonb;not null;default:'{}'"`
+	CreatedAt time.Time `gorm:"not null;default:now()"`
 }
 

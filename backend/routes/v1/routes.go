@@ -31,6 +31,9 @@ func Register(router *httprouter.Router) {
 	router.POST("/auth/signup", web.Serve(mws, endpoints.SignupEndpoint()))
 	router.POST("/auth/login", web.Serve(mws, endpoints.LoginEndpoint()))
 
+	// App events (install/onboarding) - privacy-safe analytics
+	router.POST("/events", web.Serve(mws, endpoints.EventsEndpoint()))
+
 	// Account (protected) - required for Play account deletion policy
 	router.GET("/me", web.Serve(authMws, endpoints.MeGetEndpoint()))
 	router.DELETE("/me", web.Serve(authMws, endpoints.MeDeleteEndpoint()))

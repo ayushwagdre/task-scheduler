@@ -25,6 +25,19 @@ class ApiClient {
     return _decodeEnvelope(resp);
   }
 
+  Future<Map<String, dynamic>> putJson(String path, Map<String, dynamic> body) async {
+    final uri = Uri.parse('$baseUrl$path');
+    final headers = await _headers();
+    final resp = await http.put(uri, headers: headers, body: jsonEncode(body));
+    assert(() {
+      debugPrint('PUT $uri -> ${resp.statusCode}');
+      debugPrint(resp.body);
+      return true;
+    }());
+    await _handleUnauthorized(resp);
+    return _decodeEnvelope(resp);
+  }
+
   Future<Map<String, dynamic>> getJson(String path) async {
     final uri = Uri.parse('$baseUrl$path');
     final headers = await _headers();

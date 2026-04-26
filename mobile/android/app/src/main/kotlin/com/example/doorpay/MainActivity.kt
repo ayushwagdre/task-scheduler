@@ -121,8 +121,17 @@ class MainActivity : FlutterActivity() {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
-        // Best-effort exact alarm. If Android blocks exact alarms, it may be inexact.
-        am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAtEpochMillis, pi)
+        // Best-effort: exact alarms require special app access on Android 12+.
+        // If we don't have it, fall back to inexact scheduling instead of crashing.
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && !am.canScheduleExactAlarms()) {
+                am.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAtEpochMillis, pi)
+                return
+            }
+            am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAtEpochMillis, pi)
+        } catch (se: SecurityException) {
+            am.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAtEpochMillis, pi)
+        }
     }
 
     private fun cancel(taskId: String) {

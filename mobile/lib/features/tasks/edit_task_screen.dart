@@ -2,34 +2,51 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../app/auth_state.dart';
 import '../../app/router.dart';
 import '../../app/theme/app_theme.dart';
 import '../../app/widgets/auth_text_field.dart';
 import '../../app/widgets/glass_panel.dart';
-import '../../app/auth_state.dart';
 import '../../data/api/api_client.dart';
 import '../../data/storage/settings_store.dart';
 import '../../data/storage/token_store.dart';
 import '../../platform/android_alarm/android_alarm.dart';
 import '../../platform/android_alarm/android_permissions.dart';
 
-class CreateTaskScreen extends StatefulWidget {
-  const CreateTaskScreen({super.key});
+class EditTaskScreen extends StatefulWidget {
+  const EditTaskScreen({
+    super.key,
+    required this.taskId,
+    required this.initialTitle,
+    required this.initialDescription,
+    required this.initialSchedule,
+    required this.initialTimezone,
+  });
+
+  final String taskId;
+  final String initialTitle;
+  final String initialDescription;
+  final Map<String, dynamic> initialSchedule;
+  final String initialTimezone;
 
   @override
-  State<CreateTaskScreen> createState() => _CreateTaskScreenState();
+  State<EditTaskScreen> createState() => _EditTaskScreenState();
 }
 
-class _CreateTaskScreenState extends State<CreateTaskScreen> {
+class _EditTaskScreenState extends State<EditTaskScreen> {
   static const _baseUrl =
       String.fromEnvironment('API_BASE_URL', defaultValue: 'http://localhost:8080');
 
-  final _title = TextEditingController();
-  final _description = TextEditingController(text: 'Stay disciplined.');
-  TimeOfDay _time = const TimeOfDay(hour: 9, minute: 0);
-  String _frequency = 'daily'; // daily | weekly | monthly
-  final Set<int> _daysOfWeek = {DateTime.now().weekday % 7}; // 0=Sun..6=Sat
-  int _dayOfMonth = DateTime.now().day; // 1..31
+  late final _title = TextEditingController(text: widget.initialTitle);
+  late final _description = TextEditingController(
+    text: widget.initialDescription.isEmpty ? 'Stay disciplined.' : widget.initialDescription,
+  );
+
+  late TimeOfDay _time = _initialTime();
+  late String _frequency = (widget.initialSchedule['type'] ?? 'daily').toString();
+  late final Set<int> _daysOfWeek = _initialDaysOfWeek();
+  late int _dayOfMonth = _initialDayOfMonth();
+
   bool _loading = false;
   String? _error;
 
@@ -39,6 +56,27 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
     onUnauthorized: authState.logout,
   );
   late final SettingsStore _settings = SettingsStore(const FlutterSecureStorage());
+
+  TimeOfDay _initialTime() {
+    final h = widget.initialSchedule['hour'];
+    final m = widget.initialSchedule['minute'];
+    if (h is int && m is int) return TimeOfDay(hour: h.clamp(0, 23), minute: m.clamp(0, 59));
+    return const TimeOfDay(hour: 9, minute: 0);
+  }
+
+  Set<int> _initialDaysOfWeek() {
+    final raw = widget.initialSchedule['daysOfWeek'];
+    if (raw is List) {
+      return raw.whereType<int>().where((d) => d >= 0 && d <= 6).toSet();
+    }
+    return {DateTime.now().weekday % 7};
+  }
+
+  int _initialDayOfMonth() {
+    final raw = widget.initialSchedule['dayOfMonth'];
+    if (raw is int) return raw.clamp(1, 31);
+    return DateTime.now().day.clamp(1, 31);
+  }
 
   @override
   void dispose() {
@@ -52,10 +90,10 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
       _loading = true;
       _error = null;
     });
+
     try {
       final remindersEnabled = await _settings.getRemindersEnabled();
       if (remindersEnabled) {
-        // Ask for notifications permission in-context (Android 13+). Best-effort.
         await AndroidPermissions.requestPostNotifications();
       }
 
@@ -67,30 +105,31 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
         if (_frequency == 'monthly') 'dayOfMonth': _dayOfMonth,
       };
 
-      final resp = await _api.postJson('/tasks', {
+      final updated = await _api.putJson('/tasks/${widget.taskId}', {
         'title': _title.text.trim(),
         'description':
             _description.text.trim().isEmpty ? 'Stay disciplined.' : _description.text.trim(),
-        'timezone': 'Asia/Kolkata',
+        'timezone': widget.initialTimezone,
         'schedule': schedule,
       });
-      final id = (resp['id'] ?? '').toString();
-      final next = (resp['nextTriggerAt'] ?? '').toString();
-      // Best-effort local scheduling (Android only). If it fails, task still exists on backend.
-      if (remindersEnabled && id.isNotEmpty && next.isNotEmpty) {
+
+      final next = (updated['nextTriggerAt'] ?? '').toString();
+      final title = (updated['title'] ?? _title.text.trim()).toString();
+      final active = updated['active'] == true;
+
+      if (remindersEnabled && active) {
         final dt = DateTime.tryParse(next);
         if (dt != null) {
-          final canExact = await AndroidPermissions.canScheduleExactAlarms();
-          if (!canExact) {
-            // Allow user to continue without exact alarms; deep link is available in Profile.
-          }
           await AndroidAlarm.scheduleExactAlarm(
-            taskId: id,
+            taskId: widget.taskId,
             triggerAtEpochMillis: dt.toLocal().millisecondsSinceEpoch,
-            title: _title.text.trim().isEmpty ? 'Task' : _title.text.trim(),
+            title: title.isEmpty ? 'Task' : title,
           );
         }
+      } else {
+        await AndroidAlarm.cancelAlarm(taskId: widget.taskId);
       }
+
       if (!mounted) return;
       context.go(AppRoutes.home);
     } catch (e) {
@@ -105,9 +144,9 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
     final cs = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Create task'),
+        title: const Text('Edit task'),
         leading: IconButton(
-          icon: const Icon(Icons.close),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             if (Navigator.of(context).canPop()) {
               context.pop();
@@ -129,10 +168,10 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Text('SET YOUR STAKE', style: AppTextStyles.cta.copyWith(letterSpacing: 2.0)),
+                      Text('EDIT YOUR STAKE', style: AppTextStyles.cta.copyWith(letterSpacing: 2.0)),
                       const SizedBox(height: 8),
                       Text(
-                        'Define the task or face the friction.',
+                        'Tweak the plan. Keep the discipline.',
                         style: AppTextStyles.bodyMd.copyWith(color: AppColors.onSurfaceVariant),
                       ),
                       const SizedBox(height: 16),
@@ -253,10 +292,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                         ConstrainedBox(
                           constraints: const BoxConstraints(maxHeight: 140),
                           child: SingleChildScrollView(
-                            child: Text(
-                              _error!,
-                              style: AppTextStyles.bodyMd.copyWith(color: cs.error),
-                            ),
+                            child: Text(_error!, style: AppTextStyles.bodyMd.copyWith(color: cs.error)),
                           ),
                         ),
                       ],
@@ -274,7 +310,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                   ),
                   onPressed: _loading ? null : _save,
                   child: Text(
-                    _loading ? 'CREATING…' : 'CREATE TASK',
+                    _loading ? 'SAVING…' : 'SAVE CHANGES',
                     style: AppTextStyles.cta.copyWith(letterSpacing: 2.0),
                   ),
                 ),

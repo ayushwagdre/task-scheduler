@@ -8,6 +8,7 @@ const (
 	ScheduleOnce   ScheduleType = "once"
 	ScheduleDaily  ScheduleType = "daily"
 	ScheduleWeekly ScheduleType = "weekly"
+	ScheduleMonthly ScheduleType = "monthly"
 )
 
 type TaskSchedule struct {
@@ -15,12 +16,14 @@ type TaskSchedule struct {
 	Hour      int          `json:"hour"`
 	Minute    int          `json:"minute"`
 	DaysOfWeek []int       `json:"daysOfWeek,omitempty"`
+	DayOfMonth int         `json:"dayOfMonth,omitempty"`
 }
 
 type Task struct {
 	ID            string       `json:"id"`
 	UserID        string       `json:"userId"`
 	Title         string       `json:"title"`
+	Description   string       `json:"description"`
 	Timezone      string       `json:"timezone"`
 	Schedule      TaskSchedule `json:"schedule"`
 	NextTriggerAt time.Time    `json:"nextTriggerAt"`

@@ -24,6 +24,11 @@ func ValidateSchedule(s models.TaskSchedule) error {
 			}
 		}
 		return nil
+	case models.ScheduleMonthly:
+		if s.DayOfMonth < 1 || s.DayOfMonth > 31 {
+			return errors.New("monthly schedule requires dayOfMonth 1..31")
+		}
+		return nil
 	default:
 		return errors.New("unknown schedule type")
 	}
@@ -63,8 +68,30 @@ func NextTrigger(now time.Time, tz string, sched models.TaskSchedule) (time.Time
 			return dt.UTC(), nil
 		}
 		return time.Time{}, errors.New("could not compute next weekly trigger")
+	case models.ScheduleMonthly:
+		// Find the next time (this month or a future month) that matches dayOfMonth,
+		// clamped to the last day for short months.
+		for i := 0; i <= 24; i++ {
+			m := time.Date(localNow.Year(), localNow.Month(), 1, sched.Hour, sched.Minute, 0, 0, loc).AddDate(0, i, 0)
+			lastDay := daysInMonth(m.Year(), m.Month(), loc)
+			day := sched.DayOfMonth
+			if day > lastDay {
+				day = lastDay
+			}
+			dt := time.Date(m.Year(), m.Month(), day, sched.Hour, sched.Minute, 0, 0, loc)
+			if dt.After(localNow) {
+				return dt.UTC(), nil
+			}
+		}
+		return time.Time{}, errors.New("could not compute next monthly trigger")
 	default:
 		return time.Time{}, errors.New("unknown schedule type")
 	}
+}
+
+func daysInMonth(year int, month time.Month, loc *time.Location) int {
+	// day 0 of next month == last day of current month
+	t := time.Date(year, month+1, 0, 12, 0, 0, 0, loc)
+	return t.Day()
 }
 

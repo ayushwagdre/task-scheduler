@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../app/router.dart';
 import '../../app/theme/app_theme.dart';
+import '../../data/analytics/app_analytics.dart';
+import '../../data/storage/settings_store.dart';
 
 class OnboardingScreen3 extends StatelessWidget {
   const OnboardingScreen3({super.key});
@@ -40,6 +43,16 @@ class OnboardingScreen3 extends StatelessWidget {
                 children: [
                   Row(
                     children: [
+                      IconButton(
+                        onPressed: () {
+                          if (context.canPop()) {
+                            context.pop();
+                          } else {
+                            context.go(AppRoutes.onboarding2);
+                          }
+                        },
+                        icon: const Icon(Icons.arrow_back, color: Colors.white),
+                      ),
                       CircleAvatar(
                         radius: 16,
                         backgroundColor: AppColors.surfaceContainerLow,
@@ -95,7 +108,14 @@ class OnboardingScreen3 extends StatelessWidget {
                         foregroundColor: Colors.black,
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                       ),
-                      onPressed: () => context.go(AppRoutes.login),
+                      onPressed: () async {
+                        final settings = SettingsStore(const FlutterSecureStorage());
+                        await settings.setHasSeenOnboarding(true);
+                        try {
+                          await buildAnalytics().trackOnboardingCompleted();
+                        } catch (_) {}
+                        if (context.mounted) context.go(AppRoutes.login);
+                      },
                       child: Text('GET STARTED', style: AppTextStyles.cta.copyWith(letterSpacing: 2.0)),
                     ),
                   ),
