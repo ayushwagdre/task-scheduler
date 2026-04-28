@@ -1,0 +1,7 @@
+# Environment
+.env
+**/.env
+
+# Claude
+.claude/
+**/.claude/
